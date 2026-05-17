@@ -29,15 +29,14 @@ function sendCity(city) {
 function fetchCity(lat, lon) {
   var url = 'https://nominatim.openstreetmap.org/reverse'
     + '?lat=' + lat + '&lon=' + lon
-    + '&format=json&zoom=10';
+    + '&format=json&zoom=7';
   var xhr = new XMLHttpRequest();
   xhr.onload = function() {
     try {
       var data = JSON.parse(xhr.responseText);
       var addr = data.address || {};
       /* try city → town → village → county in order */
-      var city = addr.city || addr.town || addr.village
-               || addr.county || addr.state || 'Unknown';
+      var city = addr.city || addr.county || addr.state || 'Unknown';
       /* trim to 20 chars max so it fits the watch screen */
       if (city.length > 20) city = city.substring(0, 20);
       localStorage.setItem('city', city);
@@ -92,9 +91,10 @@ function buildConfig(c) {
     + '<h3>Paper</h3>'
     + radio('paper', [
         'Original \u2014 Warm paper',
-        'Concrete \u2014 Grey wash',
-        'Cream \u2014 Clean ivory',
-        'Aged \u2014 Vintage stain'
+        'Rice Paper \u2014 Cream texture',
+        'White \u2014 Clean minimal',
+        'Teal Weave \u2014 Dark pattern',
+        'Lined \u2014 Notebook paper'
       ], c.paper)
     + '<button id="s">Save</button>'
     + '<script>'

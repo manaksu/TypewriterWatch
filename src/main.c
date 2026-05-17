@@ -9,9 +9,10 @@
 #define KEY_CITY   1
 
 #define PAPER_ORIGINAL  0
-#define PAPER_CONCRETE  1
-#define PAPER_CREAM     2
-#define PAPER_AGED      3
+#define PAPER_RICE      1
+#define PAPER_WHITE     2
+#define PAPER_TEAL      3
+#define PAPER_LINED     4
 
 static int s_paper = PAPER_ORIGINAL;
 
@@ -35,10 +36,11 @@ static char s_city_buf[24] = "---";
 /* ── background resource ── */
 static uint32_t bg_res(void) {
   switch (s_paper) {
-    case PAPER_CONCRETE: return RESOURCE_ID_IMAGE_BG_CONCRETE;
-    case PAPER_CREAM:    return RESOURCE_ID_IMAGE_BG_CREAM;
-    case PAPER_AGED:     return RESOURCE_ID_IMAGE_BG_AGED;
-    default:             return RESOURCE_ID_IMAGE_BG_PAPER;
+    case PAPER_RICE:   return RESOURCE_ID_IMAGE_BG_RICE;
+    case PAPER_WHITE:  return RESOURCE_ID_IMAGE_BG_WHITE;
+    case PAPER_TEAL:   return RESOURCE_ID_IMAGE_BG_TEAL;
+    case PAPER_LINED:  return RESOURCE_ID_IMAGE_BG_LINED;
+    default:           return RESOURCE_ID_IMAGE_BG_PAPER;
   }
 }
 

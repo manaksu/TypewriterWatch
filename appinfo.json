@@ -1,66 +1,29 @@
 {
-  "uuid": "f8c1c695-2cd7-4df6-a93f-520d297c3a83",
+  "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567891",
   "shortName": "TypeWriter",
   "longName": "TypeWriter Watch",
   "companyName": "manaksu",
   "versionLabel": "1.0",
   "sdkVersion": "3",
-  "targetPlatforms": [
-    "basalt"
-  ],
-  "watchapp": {
-    "watchface": true
-  },
+  "targetPlatforms": ["basalt"],
+  "watchapp": { "watchface": true },
   "appKeys": {
     "KEY_PAPER": 0,
     "KEY_CITY": 1
   },
   "resources": {
     "media": [
-      {
-        "type": "bitmap",
-        "name": "IMAGE_BG_PAPER",
-        "file": "images/paper_bg.png",
-        "storageFormat": "pbi"
-      },
-      {
-        "type": "bitmap",
-        "name": "IMAGE_BG_CONCRETE",
-        "file": "images/bg_concrete.png",
-        "storageFormat": "pbi"
-      },
-      {
-        "type": "bitmap",
-        "name": "IMAGE_BG_CREAM",
-        "file": "images/bg_cream.png",
-        "storageFormat": "pbi"
-      },
-      {
-        "type": "bitmap",
-        "name": "IMAGE_BG_AGED",
-        "file": "images/bg_aged.png",
-        "storageFormat": "pbi"
-      },
-      {
-        "type": "font",
-        "name": "FONT_SPECIAL_ELITE_20",
-        "file": "fonts/SpecialElite-Regular.ttf"
-      },
-      {
-        "type": "font",
-        "name": "FONT_SPECIAL_ELITE_16",
-        "file": "fonts/SpecialElite-Regular.ttf"
-      },
-      {
-        "type": "font",
-        "name": "FONT_SPECIAL_ELITE_13",
-        "file": "fonts/SpecialElite-Regular.ttf"
-      }
+      { "type": "bitmap", "name": "IMAGE_BG_PAPER",  "file": "images/paper_bg.png", "storageFormat": "pbi" },
+      { "type": "bitmap", "name": "IMAGE_BG_RICE",   "file": "images/bg_rice.png",  "storageFormat": "pbi" },
+      { "type": "bitmap", "name": "IMAGE_BG_WHITE",  "file": "images/bg_white.png", "storageFormat": "pbi" },
+      { "type": "bitmap", "name": "IMAGE_BG_TEAL",   "file": "images/bg_teal.png",  "storageFormat": "pbi" },
+      { "type": "bitmap", "name": "IMAGE_BG_LINED",  "file": "images/bg_lined.png", "storageFormat": "pbi" },
+      { "type": "font",   "name": "FONT_SPECIAL_ELITE_20", "file": "fonts/SpecialElite-Regular.ttf" },
+      { "type": "font",   "name": "FONT_SPECIAL_ELITE_16", "file": "fonts/SpecialElite-Regular.ttf" },
+      { "type": "font",   "name": "FONT_SPECIAL_ELITE_13", "file": "fonts/SpecialElite-Regular.ttf" }
     ]
   },
-  "capabilities": [
-    "configurable"
-  ],
+  "capabilities": ["configurable"],
   "projectType": "native",
   "messageKeys": {}
 }
