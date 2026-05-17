@@ -7,16 +7,21 @@
   "sdkVersion": "3",
   "targetPlatforms": ["basalt"],
   "watchapp": { "watchface": true },
-  "appKeys": {},
+  "appKeys": {
+    "KEY_PAPER": 0
+  },
   "resources": {
     "media": [
-      { "type": "bitmap", "name": "IMAGE_PAPER_BG",        "file": "images/paper_bg.png",              "storageFormat": "pbi" },
-      { "type": "font",   "name": "FONT_SPECIAL_ELITE_18", "file": "fonts/SpecialElite-Regular.ttf" },
-      { "type": "font",   "name": "FONT_SPECIAL_ELITE_14", "file": "fonts/SpecialElite-Regular.ttf" },
-      { "type": "font",   "name": "FONT_SPECIAL_ELITE_12", "file": "fonts/SpecialElite-Regular.ttf" }
+      { "type": "bitmap", "name": "IMAGE_BG_PAPER",    "file": "images/paper_bg.png",    "storageFormat": "pbi" },
+      { "type": "bitmap", "name": "IMAGE_BG_CONCRETE", "file": "images/bg_concrete.png", "storageFormat": "pbi" },
+      { "type": "bitmap", "name": "IMAGE_BG_CREAM",    "file": "images/bg_cream.png",    "storageFormat": "pbi" },
+      { "type": "bitmap", "name": "IMAGE_BG_AGED",     "file": "images/bg_aged.png",     "storageFormat": "pbi" },
+      { "type": "font",   "name": "FONT_SPECIAL_ELITE_20", "file": "fonts/SpecialElite-Regular.ttf" },
+      { "type": "font",   "name": "FONT_SPECIAL_ELITE_16", "file": "fonts/SpecialElite-Regular.ttf" },
+      { "type": "font",   "name": "FONT_SPECIAL_ELITE_13", "file": "fonts/SpecialElite-Regular.ttf" }
     ]
   },
-  "capabilities": [],
+  "capabilities": ["configurable"],
   "projectType": "native",
   "messageKeys": {}
 }
