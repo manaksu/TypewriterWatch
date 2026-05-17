@@ -1,9 +1,9 @@
 {
-  "uuid": "f8c1c695-2cd7-4df6-a93f-520d297c3a83",
+  "uuid": "a1b2c3d4-e5f6-7890-abcd-ef1234567891",
   "shortName": "TypeWriter",
   "longName": "TypeWriter Watch",
   "companyName": "manaksu",
-  "versionLabel": "1.10",
+  "versionLabel": "1.0",
   "sdkVersion": "3",
   "targetPlatforms": ["basalt"],
   "watchapp": { "watchface": true },
