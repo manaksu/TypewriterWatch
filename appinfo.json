@@ -10,27 +10,10 @@
   "appKeys": {},
   "resources": {
     "media": [
-      {
-        "type": "bitmap",
-        "name": "IMAGE_PAPER_BG",
-        "file": "images/paper_bg.png",
-        "storageFormat": "pbi"
-      },
-      {
-        "type": "font",
-        "name": "FONT_SPECIAL_ELITE_28",
-        "file": "fonts/SpecialElite-Regular.ttf"
-      },
-      {
-        "type": "font",
-        "name": "FONT_SPECIAL_ELITE_18",
-        "file": "fonts/SpecialElite-Regular.ttf"
-      },
-      {
-        "type": "font",
-        "name": "FONT_SPECIAL_ELITE_14",
-        "file": "fonts/SpecialElite-Regular.ttf"
-      }
+      { "type": "bitmap", "name": "IMAGE_PAPER_BG",        "file": "images/paper_bg.png",              "storageFormat": "pbi" },
+      { "type": "font",   "name": "FONT_SPECIAL_ELITE_18", "file": "fonts/SpecialElite-Regular.ttf" },
+      { "type": "font",   "name": "FONT_SPECIAL_ELITE_14", "file": "fonts/SpecialElite-Regular.ttf" },
+      { "type": "font",   "name": "FONT_SPECIAL_ELITE_12", "file": "fonts/SpecialElite-Regular.ttf" }
     ]
   },
   "capabilities": [],
