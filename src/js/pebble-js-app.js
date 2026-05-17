@@ -1,7 +1,9 @@
 /*
  * TypeWriter Watch -- PebbleKit JS
- *   Key 0: KEY_PAPER  0=Paper  1=Concrete  2=Cream  3=Aged
+ *   Key 0: KEY_PAPER   0=Paper  1=Concrete  2=Cream  3=Aged
+ *   Key 1: KEY_CITY    string — city name from reverse geocode
  */
+
 function loadCfg() {
   return { paper: +(localStorage.getItem('paper') || '0') };
 }
@@ -15,6 +17,58 @@ function sendMsg(c) {
     function(e) { console.log('fail', e); }
   );
 }
+function sendCity(city) {
+  Pebble.sendAppMessage(
+    { 1: city },
+    function() { console.log('city sent: ' + city); },
+    function(e) { console.log('city fail', e); }
+  );
+}
+
+/* ── reverse geocode via Nominatim ── */
+function fetchCity(lat, lon) {
+  var url = 'https://nominatim.openstreetmap.org/reverse'
+    + '?lat=' + lat + '&lon=' + lon
+    + '&format=json&zoom=10';
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function() {
+    try {
+      var data = JSON.parse(xhr.responseText);
+      var addr = data.address || {};
+      /* try city → town → village → county in order */
+      var city = addr.city || addr.town || addr.village
+               || addr.county || addr.state || 'Unknown';
+      /* trim to 20 chars max so it fits the watch screen */
+      if (city.length > 20) city = city.substring(0, 20);
+      localStorage.setItem('city', city);
+      sendCity(city);
+      console.log('City: ' + city);
+    } catch(e) {
+      console.log('Geocode parse error: ' + e);
+    }
+  };
+  xhr.onerror = function() { console.log('Geocode network error'); };
+  xhr.open('GET', url);
+  xhr.setRequestHeader('Accept', 'application/json');
+  xhr.send();
+}
+
+/* ── get location ── */
+function getLocation() {
+  navigator.geolocation.getCurrentPosition(
+    function(pos) {
+      fetchCity(pos.coords.latitude, pos.coords.longitude);
+    },
+    function(err) {
+      console.log('Geolocation error: ' + err.message);
+      /* fall back to cached city if available */
+      var cached = localStorage.getItem('city');
+      if (cached) sendCity(cached);
+    },
+    { timeout: 10000, maximumAge: 300000 }  /* cache 5 min */
+  );
+}
+
 function buildConfig(c) {
   function radio(name, opts, sel) {
     return opts.map(function(l, i) {
@@ -55,10 +109,16 @@ function buildConfig(c) {
 Pebble.addEventListener('ready', function() {
   console.log('TypeWriter ready');
   sendMsg(loadCfg());
+  /* push cached city immediately, then refresh from GPS */
+  var cached = localStorage.getItem('city');
+  if (cached) sendCity(cached);
+  getLocation();
 });
+
 Pebble.addEventListener('showConfiguration', function() {
   Pebble.openURL(buildConfig(loadCfg()));
 });
+
 Pebble.addEventListener('webviewclosed', function(e) {
   if (!e || !e.response || e.response === '' || e.response === 'CANCELLED') return;
   var raw = e.response;

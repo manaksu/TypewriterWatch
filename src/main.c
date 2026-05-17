@@ -6,6 +6,7 @@
  */
 
 #define KEY_PAPER  0
+#define KEY_CITY   1
 
 #define PAPER_ORIGINAL  0
 #define PAPER_CONCRETE  1
@@ -29,7 +30,7 @@ static GFont s_font_13;
 
 static char s_time_buf[32];
 static char s_date_buf[12];
-static const char *s_city = "Atlanta";
+static char s_city_buf[24] = "---";
 
 /* ── background resource ── */
 static uint32_t bg_res(void) {
@@ -83,6 +84,12 @@ static void inbox_received(DictionaryIterator *iter, void *ctx) {
     persist_write_int(KEY_PAPER, s_paper);
     apply_paper();
   }
+  Tuple *city_t = dict_find(iter, KEY_CITY);
+  if (city_t) {
+    snprintf(s_city_buf, sizeof(s_city_buf), "%s", city_t->value->cstring);
+    persist_write_string(KEY_CITY, s_city_buf);
+    text_layer_set_text(s_city_layer, s_city_buf);
+  }
 }
 
 /* ── window load ── */
@@ -113,7 +120,7 @@ static void window_load(Window *window) {
   /* bluetooth — top right, bold GOTHIC_18 */
   s_bt_layer = text_layer_create(GRect(94, 6, 46, 22));
   text_layer_set_background_color(s_bt_layer, GColorClear);
-  text_layer_set_font(s_bt_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18_BOLD));
+  text_layer_set_font(s_bt_layer, fonts_get_system_font(FONT_KEY_GOTHIC_18));
   text_layer_set_text_alignment(s_bt_layer, GTextAlignmentRight);
   layer_add_child(root, text_layer_get_layer(s_bt_layer));
 
@@ -123,7 +130,7 @@ static void window_load(Window *window) {
   text_layer_set_text_color(s_city_layer, GColorBlack);
   text_layer_set_font(s_city_layer, s_font_16);
   text_layer_set_text_alignment(s_city_layer, GTextAlignmentRight);
-  text_layer_set_text(s_city_layer, s_city);
+  text_layer_set_text(s_city_layer, s_city_buf);
   layer_add_child(root, text_layer_get_layer(s_city_layer));
 
   /* date — bottom right, 16px */
@@ -153,6 +160,9 @@ static void window_unload(Window *window) {
 
 static void init(void) {
   s_paper = persist_exists(KEY_PAPER) ? persist_read_int(KEY_PAPER) : PAPER_ORIGINAL;
+  if (persist_exists(KEY_CITY)) {
+    persist_read_string(KEY_CITY, s_city_buf, sizeof(s_city_buf));
+  }
 
   s_window = window_create();
   window_set_background_color(s_window, GColorWhite);
@@ -165,7 +175,7 @@ static void init(void) {
   connection_service_subscribe((ConnectionHandlers){
     .pebble_app_connection_handler = bt_handler
   });
-  app_message_open(64, 64);
+  app_message_open(256, 64);
   app_message_register_inbox_received(inbox_received);
 }
 
